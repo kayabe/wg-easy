@@ -17,6 +17,18 @@ module.exports = class Util {
     return true;
   }
 
+  static isValidIPv6(str) {
+    const blocks = str.split(':');
+    if (blocks.length !== 8) return false;
+  
+    for (let value of blocks) {
+      if (value.length === 0 || value.length > 4) return false;
+      if (!/^[0-9A-Fa-f]{1,4}$/.test(value)) return false;
+    }
+  
+    return true;
+  }
+
   static promisify(fn) {
     // eslint-disable-next-line func-names
     return function(req, res) {
